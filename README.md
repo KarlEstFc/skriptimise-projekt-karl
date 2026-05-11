@@ -1,146 +1,60 @@
-# Task Runner — Multiplatform Extension Manager
+# Failide Laiendite Haldur
 
-Professional, elegant implementation across **4 languages**: Bash, Python, Node.js, and PowerShell.
+Skriptid failide laiendite lugemiseks ja otsimiseks kolmes programmeerimiskeeles.
 
-## Overview
+## Kirjeldus
 
-This project demonstrates clean, minimal code patterns for file I/O operations. Two core tasks:
+Projekt sisaldab kahte ülesannet:
 
-1. **Task 1** — Select random extension from `laiendid.txt`, append to `random.txt`
-2. **Task 2** — Count occurrences of specified extension in `random.txt`
+1. **Task 1** — Loe juhusliku laiendi failist `laiendid.txt` ja kirjuta faili `random.txt`
+2. **Task 2** — Otsib ja loendab, mitu korda antud laiend failist `random.txt` esineb
 
-## Installation
+## Paigaldamine
 
 ```bash
 git clone https://github.com/KarlEstFc/skriptimise-projekt-karl.git
 cd skriptimise-projekt-karl
 ```
 
-## Quick Start
+## Kasutamine
 
 ### Bash
 ```bash
-./task_01.sh              # Generate random extension
-./task_02.sh txt          # Count 'txt' occurrences
+./task_01.sh              # Genereeri juhuslik laiend
+./task_02.sh txt          # Otsida 'txt' esinemisi
 ```
 
 ### Python
 ```bash
-python task_01.py         # Generate random extension
-python task_02.py txt     # Count 'txt' occurrences
-```
-
-### Node.js
-```bash
-npm install               # Optional: only needed for npm scripts
-npm run task:01           # Generate random extension
-npm run task:02 txt       # Count 'txt' occurrences
+python task_01.py         # Genereeri juhuslik laiend
+python task_02.py txt     # Otsida 'txt' esinemisi
 ```
 
 ### PowerShell
 ```powershell
 Import-Module .\TwoTask\TwoTask.psd1
-Task01                    # Generate random extension
-Task02 -Laiend txt        # Count 'txt' occurrences
+Task01                    # Genereeri juhuslik laiend
+Task02 -Laiend txt        # Otsida 'txt' esinemisi
 ```
 
-### Universal Runner (Auto-detects Runtime)
-```bash
-./run task1               # Run Task 1 with any available runtime
-./run task2 txt           # Run Task 2 with any available runtime
-```
+## Failide Ülevaade
 
-### Makefile (Cross-platform)
-```bash
-make task1                # Generate random extension
-make task2 EXT=txt        # Count 'txt' occurrences
-make test                 # Run full workflow
-make clean                # Remove random.txt
-```
+| Fail | Kirjeldus |
+|------|-----------|
+| `task_01.sh` | Bash: genereeri juhuslik laiend |
+| `task_02.sh` | Bash: otsi laiendi esinemisi |
+| `task_01.py` | Python: genereeri juhuslik laiend |
+| `task_02.py` | Python: otsi laiendi esinemisi |
+| `TwoTask/` | PowerShell moodul Task01 ja Task02 funktsioonidega |
+| `laiendid.txt` | Algfail failide laiendiga (txt, pdf, jpg, png) |
+| `random.txt` | Väljundfail, mida Task1 täidab |
 
-## Project Structure
+## Tehnilised Üksikasjad
 
-```
-.
-├── task_01.sh            # Bash: Generate random extension
-├── task_02.sh            # Bash: Count occurrences
-├── task_01.py            # Python: Generate random extension
-├── task_02.py            # Python: Count occurrences
-├── task_01.mjs           # Node.js: Generate random extension
-├── task_02.mjs           # Node.js: Count occurrences
-├── TwoTask/              # PowerShell module
-│   ├── TwoTask.psd1      # Module manifest
-│   ├── TwoTask.psm1      # Module loader
-│   └── Functions/
-│       ├── Task01.ps1    # PowerShell: Generate random extension
-│       └── Task02.ps1    # PowerShell: Count occurrences
-├── laiendid.txt          # Input file (file extensions)
-├── random.txt            # Output file (generated results)
-├── package.json          # Node.js configuration
-├── Makefile              # Universal build interface
-├── run                   # Intelligent runtime detector
-└── README.md             # This file
-```
+Kõik skriptid on kirjutatud puhtalt ja lihtsalt:
+- Lugemas failidest andmeid
+- Kasutades juhuslikku valikut
+- Kirjutades tulemusi väljundfaili
+- Käsitledes vigu korrektselt
 
-## Implementation Details
-
-### Code Philosophy
-- **Minimal**: No unnecessary complexity, ~10-20 lines per script
-- **Professional**: Clean error handling, proper exit codes
-- **Elegant**: Unicode symbols (✓/✗), efficient logic
-- **Portable**: Works on Windows, macOS, Linux
-
-### Data Files
-- **laiendid.txt** — Source file with one file extension per line (txt, pdf, jpg, png)
-- **random.txt** — Dynamically created; stores results from Task 1
-
-## Error Handling
-
-All implementations gracefully handle:
-- Missing input files (`laiendid.txt`)
-- Empty input files
-- Missing output files (Task 2 prerequisite)
-- Invalid command-line arguments
-
-Exit code `1` indicates failure; `0` indicates success.
-
-## Performance
-
-All implementations are optimized for:
-- Memory efficiency (streaming, no large buffers)
-- Speed (single-pass reads where possible)
-- Startup time (minimal dependencies)
-
-## Compatibility
-
-| Platform | Supported | Required |
-|----------|-----------|----------|
-| **Windows** | ✓ | PowerShell or Python or Node.js |
-| **macOS** | ✓ | Bash or Python or Node.js |
-| **Linux** | ✓ | Bash or Python or Node.js |
-
-## Development
-
-### Run all tests
-```bash
-make test
-```
-
-### Clean up generated files
-```bash
-make clean
-```
-
-### Add to PATH for global access
-```bash
-chmod +x ./run
-export PATH=$PATH:$(pwd)
-```
-
-## License
-
-Open source — feel free to use and modify.
-
----
-
-**Karl** | [GitHub](https://github.com/KarlEstFc/)
+Programmid väljuvad koodi `1` puhul viga ja koodi `0` puhul edukas tegemine.

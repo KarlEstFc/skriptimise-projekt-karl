@@ -1,9 +1,0 @@
-{
-  "name": "task-runner",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "task:01": "node task_01.mjs",
-    "task:02": "node task_02.mjs"
-  }
-}
