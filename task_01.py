@@ -1,31 +1,20 @@
 import random
-import os
+import sys
 
-# Failide nimed
-laiendite_fail = "laiendid.txt"
-tulemuse_fail = "random.txt"
-
-# 1. Kontrollime, kas laiendite fail on olemas
-if not os.path.exists(laiendite_fail):
-    print(f"Viga: Faili '{laiendite_fail}' ei leitud!")
-    exit()
-
-# 2. Loeme failist kõik laiendid järjendisse (listi)
-with open(laiendite_fail, "r", encoding="utf-8") as fail:
-    # Loeb read ja eemaldab tühikud/reavahetused
-    laiendid =[rida.strip() for rida in fail if rida.strip()]
-
-# 3. Kontrollime, et fail ei oleks tühi
-if len(laiendid) == 0:
-    print(f"Viga: Fail '{laiendite_fail}' on tühi!")
-    exit()
-
-# 4. Võtame failist ühe juhusliku laiendi
-suvaline_laiend = random.choice(laiendid)
-
-# 5. Lisame leitud laiendi uude faili (random.txt)
-with open(tulemuse_fail, "a", encoding="utf-8") as fail:
-    fail.write(suvaline_laiend + "\n")
-
-# Prindime info
-print(f"Edukalt lisatud juhuslik laiend '{suvaline_laiend}' faili {tulemuse_fail}.")
+try:
+    with open("laiendid.txt", encoding="utf-8") as f:
+        extensions = [line.strip() for line in f if line.strip()]
+    
+    if not extensions:
+        raise ValueError("Fail on tühi")
+    
+    chosen = random.choice(extensions)
+    with open("random.txt", "a", encoding="utf-8") as f:
+        f.write(chosen + "\n")
+    print(f"✓ {chosen}")
+except FileNotFoundError:
+    print("✗ laiendid.txt puudub", file=sys.stderr)
+    sys.exit(1)
+except ValueError as e:
+    print(f"✗ {e}", file=sys.stderr)
+    sys.exit(1)

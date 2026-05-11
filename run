@@ -1,0 +1,19 @@
+#!/bin/bash
+# Unified task runner with intelligent platform detection
+
+cmd="${1:-task1}"
+ext="${2:-}"
+
+run_task() {
+  if command -v python &>/dev/null; then
+    python "task_0${cmd: -1}.py" $ext 2>/dev/null && return 0
+  fi
+  if command -v node &>/dev/null; then
+    npm run "task:0${cmd: -1}" $ext 2>/dev/null && return 0
+  fi
+  bash "task_0${cmd: -1}.sh" $ext 2>/dev/null && return 0
+  pwsh -c "Import-Module .\\TwoTask\\TwoTask.psd1; Task0${cmd: -1} $ext" 2>/dev/null
+}
+
+[[ "$cmd" != task1 && "$cmd" != task2 ]] && { echo "usage: ${0##*/} [task1|task2] [ext]" >&2; exit 1; }
+run_task || { echo "✗ No compatible runtime found" >&2; exit 1; }
